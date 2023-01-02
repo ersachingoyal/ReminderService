@@ -1,0 +1,5 @@
+in this service we will set up sending mails to the user, so we will use gmail's smtp server.
+to connect that server to our project we will use nodemailer npm i nodemailer
+
+to get started go on gmail, click on security and setup app password from there, we have to keep 2fa on,
+this app password will be the one that we will use in our app to send the email
