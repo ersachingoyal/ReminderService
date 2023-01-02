@@ -3,3 +3,5 @@ to connect that server to our project we will use nodemailer npm i nodemailer
 
 to get started go on gmail, click on security and setup app password from there, we have to keep 2fa on,
 this app password will be the one that we will use in our app to send the email
+
+here we will be also needing something to schedule our jobs, because we will having one function to send the notification to user  24 hours before the user has a scedhuled flight, so to so this scheduling we will be using cron jobs, and in node we have node-cron to do this.
