@@ -2,15 +2,19 @@ const bodyParser = require('body-parser')
 const express = require('express')
 
 const { PORT } = require('./config/serverConfig');
+const TicketController = require('./controllers/ticket-controller');
 
 // const { sendBasicEmail } = require('./services/email-service');
 
 const cron = require('node-cron')
+const jobs = require('./utils/jobs')
 
 const setUpAndStartServer = () => {
     const app = express();
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
+
+    app.post('/api/v1/tickets', TicketController.create); //because this is a very small service we are not creating the routes separately
 
     app.listen(PORT, () => {
         console.log(`Server started on the port ${PORT}`);
@@ -27,6 +31,8 @@ const setUpAndStartServer = () => {
         // cron.schedule('*/2 * * * *', () => {
         //     console.log('running a task every two minutes')
         // })
+
+        jobs();
     })
     
 }

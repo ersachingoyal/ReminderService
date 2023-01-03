@@ -1,4 +1,7 @@
 const sender = require('../config/emailConfig');
+const TicketRepository = require('../repository/ticket-repostitory')
+
+const repo = new TicketRepository();
 
 const sendBasicEmail = (mailFrom, mailTo, mailSubject, mailBody) => {
     //this sendmail is an async function so we have wrap it in try catch and use async await, but as sending email is not immediate so the promise will be resolved in sometime
@@ -9,7 +12,38 @@ const sendBasicEmail = (mailFrom, mailTo, mailSubject, mailBody) => {
         text: mailBody
     });
 }
+
+const fetchPendingMails = async (timeStamp) => {
+    try {
+        const response = await repo.get({status: "PENDING"});
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const createNotification = async (data) => {
+    try {
+        const response = await repo.create(data);
+        return response;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+// this function is tp update the status after sending the mail 
+const updateTicket = async (ticketId, data) =>{
+    try {
+        const response = await repo.update(ticketId, data);
+        return response;
+    } catch (error) {
+        console.log(error)
+    }
+}
  
 module.exports = {
-    sendBasicEmail
+    sendBasicEmail,
+    fetchPendingMails,
+    createNotification,
+    updateTicket
 }
