@@ -5,3 +5,6 @@ to get started go on gmail, click on security and setup app password from there,
 this app password will be the one that we will use in our app to send the email
 
 here we will be also needing something to schedule our jobs, because we will having one function to send the notification to user  24 hours before the user has a scedhuled flight, so to so this scheduling we will be using cron jobs, and in node we have node-cron to do this.
+
+
+the channel object we will create in the v1 route file and from there we will pass it to the controller, because we will need the channel methods there, because whenver we have created a ticket we need to call the method and send a message to the queue --> this is for the booking service
